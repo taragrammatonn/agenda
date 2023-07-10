@@ -1,0 +1,15 @@
+spring:
+  config:
+    import: "optional:configserver:http://config-service:8088"
+    activate:
+      on-profile: docker
+---
+spring:
+  application:
+    name: telegram-service
+  config:
+    import: "optional:configserver:http://87.248.168.158:8088"
+
+bot:
+  name: ${env.BOT_NAME}
+  token: 832766512:AAEkYX4hYAM1HfGkWETQiuzYrBLlzCdfcuU
