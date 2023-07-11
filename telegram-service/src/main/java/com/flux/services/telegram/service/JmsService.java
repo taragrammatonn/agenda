@@ -1,6 +1,7 @@
 package com.flux.services.telegram.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.flux.services.telegram.entity.Event;
 import com.flux.services.telegram.entity.UserVO;
 import com.pengrad.telegrambot.model.Update;
 import jakarta.jms.TextMessage;
@@ -29,6 +30,18 @@ public class JmsService {
         UserVO user = new UserVO(update.message().chat().id(), update.message().from().firstName(),update.message().from().lastName());
         String jsonObj = new ObjectMapper().writer().withDefaultPrettyPrinter().writeValueAsString(user);
         jmsTemplate.send(topic, messageCreator -> {
+            TextMessage message = messageCreator.createTextMessage();
+            message.setText(jsonObj);
+            return message;
+        });
+        log.info("Sent message to topic \"{}\" with \"{}\" content.", topic, jsonObj);
+    }
+
+
+    @SneakyThrows
+    public void getEvents(Event event) {
+        String jsonObj = new ObjectMapper().writer().withDefaultPrettyPrinter().writeValueAsString(event);
+        jmsTemplate.send("getEvents", messageCreator -> {
             TextMessage message = messageCreator.createTextMessage();
             message.setText(jsonObj);
             return message;

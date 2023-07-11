@@ -26,7 +26,7 @@ public class TelegramUpdateService {
     public void messageProcessing(Update update) {
         if (commands.containsKey(update.message().text()))
             commands.get(update.message().text()).generateCommand(update);
-        sendDefaultResponse(update);
+        else sendDefaultResponse(update);
 
     }
 

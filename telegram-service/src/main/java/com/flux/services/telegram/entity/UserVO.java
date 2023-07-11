@@ -10,8 +10,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public
-class UserVO {
+public class UserVO {
 
     public UserVO(Long chatId, String fName, String lName) {
         this.chatId = chatId;
