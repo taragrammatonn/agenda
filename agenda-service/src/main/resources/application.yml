@@ -8,4 +8,4 @@ spring:
   application:
     name: agenda-service
   config:
-    import: "optional:configserver:http://87.248.168.158:8088"
+    import: "optional:configserver:http://localhost:8088"
